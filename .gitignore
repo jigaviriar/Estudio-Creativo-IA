@@ -1,0 +1,14 @@
+.env
+app/data/
+logs/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Documento de diseño: se mantiene local, no se publica en el repositorio.
+docs/
+
+# Material del instituto con aviso de "reproducción prohibida" — no se redistribuye.
+IEP/

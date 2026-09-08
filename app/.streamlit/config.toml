@@ -1,0 +1,44 @@
+# Oculta el botón "Deploy" y el menú de opciones de desarrollador (rerun,
+# clear cache) de la barra superior — no aporta a un MVP interno.
+[client]
+toolbarMode = "minimal"
+
+# Tema claro estilo Gemini: blanco/gris muy suave, acentos en azul, con un
+# gradiente de marca (azul-morado-rosa) reservado para el saludo y los avatares
+# vía CSS en app.py / app_pages/chat.py.
+[theme]
+base = "light"
+primaryColor = "#1a73e8"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f0f4f9"
+codeBackgroundColor = "#f0f4f9"
+textColor = "#1f1f1f"
+linkColor = "#1a73e8"
+borderColor = "#e3e6ea"
+showWidgetBorder = false
+showSidebarBorder = false
+baseRadius = "20px"
+buttonRadius = "full"
+font = "Roboto:https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap"
+codeFont = "'JetBrains Mono':https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+codeFontSize = "0.85rem"
+codeTextColor = "#3c4043"
+baseFontSize = 15
+baseFontWeight = 400
+headingFontSizes = ["30px", "24px", "20px", "16px", "14px", "12px"]
+headingFontWeights = [500, 500, 500, 500, 500, 500]
+linkUnderline = false
+chartCategoricalColors = ["#4285f4", "#9168c0", "#ee4c77", "#1a73e8", "#34a853", "#fbbc04", "#ea4335"]
+
+violetColor = "#9168c0"
+blueColor = "#4285f4"
+greenColor = "#34a853"
+yellowColor = "#fbbc04"
+orangeColor = "#fa903e"
+redColor = "#ea4335"
+
+[theme.sidebar]
+backgroundColor = "#f0f4f9"
+secondaryBackgroundColor = "#ffffff"
+codeBackgroundColor = "#ffffff"
+borderColor = "#e3e6ea"
