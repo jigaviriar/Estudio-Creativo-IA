@@ -108,28 +108,12 @@ Pon `DEMO_MODE=true` en `.env`. La interfaz funciona igual, pero `bedrock_client
 simuladas en vez de llamar a `invoke_model`. El código de la llamada real queda igual de visible y
 comentado en ese archivo — es la integración que se ejecutaría en cuanto actives el acceso.
 
-## Flujo de prueba sugerido (para la demo/video)
+## Cómo probar rápido
 
-1. Cambia el "Usuario activo (demo)" en la barra lateral entre los tres roles y observa cómo cambia lo que
-   puedes hacer (el feed del chat es el mismo para todos; los controles cambian según el rol).
-2. Como **Diseñador**: escribe una descripción en el chat, ajusta el estilo en :material/tune: *Opciones de
-   imagen* y genera la imagen. Descárgala desde el propio mensaje.
-3. Como **Redactor**: escribe un texto en el chat para crear un contenido, elige la acción (Corregir,
-   Variaciones...) en :material/tune: *Opciones de edición* y pulsa **Aplicar**. Cada versión queda como un
-   turno nuevo en el feed (así se ve el historial).
-4. (Opcional) Sube una guía de marca desde el expander de la barra lateral y activa "Aplicar guía de marca"
-   antes de pulsar Aplicar.
-5. Como **Aprobador**: en el mismo feed, comenta una imagen o un texto y cambia su estado a "Aprobado" o
-   "Rechazado".
-6. Ve a la pestaña **Ética y seguridad** (arriba) para ver las salvaguardas activas (moderación, cifrado,
-   system prompt).
-7. Ve a la pestaña **Auditoría** para ver el detalle real de cada llamada a Bedrock que acabas de generar:
-   usuario, modelo, request enviado, tokens/semilla y el `RequestId` de AWS como evidencia de que la llamada
-   ocurrió de verdad (no aplica en `DEMO_MODE`, donde se marca como simulada).
-8. (Opcional, antes de grabar de nuevo) En la barra lateral de **Estudio**, usa "Borrar todo y empezar de
-   nuevo" para limpiar los datos de prueba — pide confirmación explícita antes de borrar.
-9. (Opcional) En **Auditoría**, el botón "Borrar" hace lo mismo con el historial de llamadas a Bedrock —
-   es independiente del botón anterior, porque ese log no se toca al reiniciar el feed.
+Cambia de rol en la barra lateral ("Usuario activo"), genera una imagen o edita un texto en **Estudio**,
+revisa las salvaguardas en **Ética y seguridad**, y confirma el detalle real de la llamada a Bedrock
+(modelo, request, response, `RequestId` de AWS) en **Auditoría**. Ambas pestañas de trabajo (Estudio y
+Auditoría) tienen su propio botón de reinicio, con confirmación explícita antes de borrar.
 
 ## Notas de seguridad
 
