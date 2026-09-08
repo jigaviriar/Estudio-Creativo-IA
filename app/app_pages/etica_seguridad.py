@@ -5,7 +5,6 @@ from prompts import BLOCKED_TERMS, SYSTEM_PROMPT_TEMPLATE
 from security import encryption_enabled
 
 st.title("Ética y seguridad", icon=":material/security:")
-st.caption("Salvaguardas activas en esta instancia — detalle completo en docs/3.6-etica-y-seguridad.md")
 
 col1, col2 = st.columns(2)
 

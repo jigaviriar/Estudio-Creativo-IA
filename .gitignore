@@ -9,6 +9,7 @@ venv/
 
 # Documento de diseño: se mantiene local, no se publica en el repositorio.
 docs/
+*.docx
 
 # Material del instituto con aviso de "reproducción prohibida" — no se redistribuye.
 IEP/

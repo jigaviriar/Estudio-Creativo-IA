@@ -4,7 +4,7 @@ Simplificación deliberada de MVP: el "login" es una selección de usuario
 demo en la barra lateral, sin contraseña. Sustituye a un sistema de
 identidad real. En producción se recomienda Amazon Cognito (o el SSO
 corporativo existente) para autenticación real y roles gestionados de forma
-centralizada — ver docs/3.7-resumen-de-decisiones-clave.md.
+centralizada.
 """
 from __future__ import annotations
 

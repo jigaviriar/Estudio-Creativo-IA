@@ -10,9 +10,7 @@ import json
 
 import streamlit as st
 
-from config import LOGS_DIR
-
-LOG_FILE = LOGS_DIR / "bedrock_calls.jsonl"
+from bedrock_client import LOG_FILE, clear_log
 
 TASK_ICONS = {
     "generar_imagen": ":material/palette:",
@@ -48,11 +46,22 @@ def render_field(label: str, value, key: str) -> None:
 
 
 st.title("Auditoría", icon=":material/fact_check:")
-st.caption(
-    "Registro real de cada llamada a Amazon Bedrock: quién la disparó, qué modelo se invocó, "
-    "con qué parámetros (request) y qué respondió la API (response). Evidencia técnica de que la "
-    "app consume los modelos de verdad — no solo datos fijos (ver docs/3.2 y 3.3)."
-)
+
+col_caption, col_clear = st.columns([5, 1])
+with col_caption:
+    st.caption(
+        "Registro real de cada llamada a Amazon Bedrock: quién la disparó, qué modelo se invocó, "
+        "con qué parámetros (request) y qué respondió la API (response). Evidencia técnica de que la "
+        "app consume los modelos de verdad — no solo datos fijos."
+    )
+with col_clear:
+    with st.popover(":material/delete_sweep: Borrar"):
+        st.caption("Elimina permanentemente todo el historial de auditoría. No se puede deshacer.")
+        confirm = st.checkbox("Confirmo que quiero borrar la auditoría")
+        if st.button("Borrar auditoría", icon=":material/delete_forever:", type="primary", disabled=not confirm):
+            clear_log()
+            st.toast("Auditoría borrada.", icon=":material/check:")
+            st.rerun()
 
 entries = load_entries()
 

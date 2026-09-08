@@ -26,6 +26,8 @@ import config
 from prompts import STYLE_SUFFIXES, TASK_PARAMS, build_system_prompt, build_user_prompt
 from security import moderate
 
+LOG_FILE = config.LOGS_DIR / "bedrock_calls.jsonl"
+
 
 def _record(*, user: str, task: str, model_id: str, region: str, demo_mode: bool,
             request: dict, response: dict) -> None:
@@ -39,8 +41,14 @@ def _record(*, user: str, task: str, model_id: str, region: str, demo_mode: bool
         "request": request,
         "response": response,
     }
-    with open(config.LOGS_DIR / "bedrock_calls.jsonl", "a", encoding="utf-8") as f:
+    with open(LOG_FILE, "a", encoding="utf-8") as f:
         f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+
+
+def clear_log() -> None:
+    """Borra permanentemente el historial de auditoría (logs/bedrock_calls.jsonl)."""
+    if LOG_FILE.exists():
+        LOG_FILE.unlink()
 
 
 def _bedrock_runtime(region: str | None = None):
