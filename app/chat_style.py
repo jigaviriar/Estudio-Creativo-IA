@@ -1,4 +1,4 @@
-"""CSS personalizado para acercar la interfaz al estilo visual de Gemini.
+"""CSS personalizado para el look de la interfaz de chat.
 
 El theming nativo de Streamlit (.streamlit/config.toml) no permite quitar el
 borde/fondo de los `st.chat_message`, dar forma de píldora al `st.chat_input`
@@ -13,13 +13,13 @@ GRADIENT = "linear-gradient(90deg, #4285f4, #9168c0, #ee4c77)"
 # --- Chrome global: header, navegación superior, tipografía ---
 GLOBAL_CSS = f"""
 <style>
-/* El header por defecto de Streamlit no existe en Gemini: lo hacemos transparente
-   en vez de ocultarlo, para conservar el menú (deploy/about) accesible. */
+/* El header por defecto de Streamlit se hace transparente en vez de ocultarlo,
+   para conservar el menú (deploy/about) accesible con un look más limpio. */
 [data-testid="stHeader"] {{
     background: transparent;
 }}
 
-/* Navegación superior (Estudio / Ética y seguridad) como pestañas tipo Gemini */
+/* Navegación superior (Estudio / Ética y seguridad / Auditoría) como pestañas redondeadas */
 [data-testid="stTopNavSection"] {{
     gap: 0.25rem;
 }}
@@ -37,7 +37,7 @@ GLOBAL_CSS = f"""
 # --- Página de chat: burbujas, input tipo píldora, saludo con gradiente ---
 CHAT_CSS = f"""
 <style>
-/* Quita el borde/fondo por defecto de los mensajes: Gemini no usa burbujas. */
+/* Quita el borde/fondo por defecto de los mensajes: sin burbujas rectangulares. */
 [data-testid="stChatMessage"] {{
     background: transparent;
     border: none;
@@ -47,18 +47,18 @@ CHAT_CSS = f"""
 
 /* El mensaje del usuario sí lleva un fondo suave tipo píldora (marcador propio
    + selector de hermano adyacente, no depende de internals de Streamlit). */
-.gem-user-marker + [data-testid="stChatMessage"] [data-testid="stChatMessageContent"] {{
+.chat-user-marker + [data-testid="stChatMessage"] [data-testid="stChatMessageContent"] {{
     background: #f0f4f9;
     border-radius: 20px;
     padding: 0.6rem 1rem;
     display: inline-block;
 }}
 
-/* Avatar con el gradiente de marca (el "spark" de Gemini) */
+/* Avatar con el gradiente de marca */
 [data-testid="stChatMessageAvatarCustom"] {{
     background: {GRADIENT} !important;
 }}
-.gem-user-marker + [data-testid="stChatMessage"] [data-testid="stChatMessageAvatarCustom"] {{
+.chat-user-marker + [data-testid="stChatMessage"] [data-testid="stChatMessageAvatarCustom"] {{
     background: #e8eaed !important;
 }}
 
@@ -75,7 +75,7 @@ CHAT_CSS = f"""
 }}
 
 /* Saludo centrado con el gradiente de marca (estado vacío, estilo "Hola, ...") */
-.gem-greeting {{
+.chat-greeting {{
     text-align: center;
     font-size: 2.3rem;
     font-weight: 500;
@@ -85,7 +85,7 @@ CHAT_CSS = f"""
     color: transparent;
     margin-bottom: 0.25rem;
 }}
-.gem-subgreeting {{
+.chat-subgreeting {{
     text-align: center;
     color: #5f6368;
     margin-bottom: 1.5rem;
@@ -110,8 +110,8 @@ def inject_chat() -> None:
 def user_marker() -> None:
     """Emitir justo antes de un st.chat_message de rol usuario, para que el
     selector CSS de hermano adyacente le aplique el fondo tipo píldora."""
-    st.html('<div class="gem-user-marker"></div>')
+    st.html('<div class="chat-user-marker"></div>')
 
 
 def greeting(title: str, subtitle: str) -> None:
-    st.html(f'<div class="gem-greeting">{title}</div><div class="gem-subgreeting">{subtitle}</div>')
+    st.html(f'<div class="chat-greeting">{title}</div><div class="chat-subgreeting">{subtitle}</div>')

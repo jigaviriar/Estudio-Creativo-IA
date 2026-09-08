@@ -3,7 +3,7 @@
 [client]
 toolbarMode = "minimal"
 
-# Tema claro estilo Gemini: blanco/gris muy suave, acentos en azul, con un
+# Tema claro minimalista: blanco/gris muy suave, acentos en azul, con un
 # gradiente de marca (azul-morado-rosa) reservado para el saludo y los avatares
 # vía CSS en app.py / app_pages/chat.py.
 [theme]

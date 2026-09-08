@@ -2,7 +2,7 @@
 
 Caso práctico de Generative AI — **Vía A: aplicación funcional**.
 
-App Streamlit con **una interfaz única estilo chat** (tema claro, estilo Gemini) que integra **Amazon Bedrock** para:
+App Streamlit con **una interfaz única estilo chat** (tema claro y minimalista) que integra **Amazon Bedrock** para:
 - generar imágenes con **Stability AI** (con selector de estilo: anime, óleo, realismo),
 - editar y mejorar texto con **Claude** (resumir, expandir, corregir, generar variaciones),
 - aplicar opcionalmente **RAG** sobre una guía de marca usando embeddings de **Amazon Titan**,
@@ -25,8 +25,8 @@ app/
   bedrock_client.py             # wrapper: única capa que llama a bedrock-runtime
   rag.py                        # troceo, embeddings Titan e índice en memoria para la guía de marca
   auth.py                       # roles y permisos (selección de usuario demo)
-  gemini_style.py               # CSS del tema Gemini (burbujas, saludo, input tipo píldora)
-  .streamlit/config.toml        # tema claro estilo Gemini (chat-like)
+  chat_style.py                 # CSS del tema de chat (burbujas, saludo, input tipo píldora)
+  .streamlit/config.toml        # tema claro minimalista (chat-like)
   app_pages/
     chat.py                     # interfaz única: imágenes + edición de texto + colaboración, en un feed de chat
     etica_seguridad.py          # resumen de las salvaguardas activas

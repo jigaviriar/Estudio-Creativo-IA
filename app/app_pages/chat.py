@@ -1,4 +1,4 @@
-"""Estudio Creativo IA — interfaz única estilo chat (look inspirado en Gemini).
+"""Estudio Creativo IA — interfaz única estilo chat.
 
 Todas las funcionalidades (generación de imágenes, edición de texto, guía de
 marca/RAG, colaboración con comentarios y aprobación) viven en un solo feed
@@ -7,7 +7,7 @@ conversacional compartido por el equipo, con permisos según el rol activo.
 import streamlit as st
 from botocore.exceptions import ClientError
 
-import gemini_style
+import chat_style
 from auth import can, current_user, render_user_switcher
 from bedrock_client import edit_text, generate_image
 from prompts import STYLE_SUFFIXES, TASK_LABELS
@@ -156,7 +156,7 @@ def render_feed(turns: list[dict]) -> None:
     for turn in turns:
         if turn["kind"] == "image":
             item = turn["item"]
-            gemini_style.user_marker()
+            chat_style.user_marker()
             with st.chat_message("user", avatar=ROLE_AVATARS.get(item["role"], ":material/person:")):
                 st.markdown(f":material/palette: **Generar imagen** · estilo _{item['style']}_")
                 st.write(item["prompt_plain"])
@@ -173,13 +173,13 @@ def render_feed(turns: list[dict]) -> None:
         elif turn["kind"] == "content_version":
             item, version = turn["item"], turn["version"]
             if version["action"] == "original":
-                gemini_style.user_marker()
+                chat_style.user_marker()
                 with st.chat_message("user", avatar=ROLE_AVATARS.get(version["role"], ":material/person:")):
                     st.markdown(f":material/description: **{item['title']}**")
                     st.write(version["text_plain"])
                     st.caption(f"{version['author']} · {version['timestamp'][:16].replace('T', ' ')}")
             else:
-                gemini_style.user_marker()
+                chat_style.user_marker()
                 with st.chat_message("user", avatar=ROLE_AVATARS.get(version["role"], ":material/person:")):
                     st.markdown(f":material/bolt: **{TASK_LABELS.get(version['action'], version['action'])}** · _{item['title']}_")
                     st.caption(f"{version['author']} · {version['timestamp'][:16].replace('T', ' ')}")
@@ -219,7 +219,7 @@ def _run_image_generation(prompt, style, negative_prompt, seed, user, role) -> b
     """Devuelve True si la imagen se generó y guardó con éxito (para que el
     llamador solo haga st.rerun() en ese caso; si no, el error debe quedar
     visible en pantalla en vez de borrarse en el siguiente rerun)."""
-    gemini_style.user_marker()
+    chat_style.user_marker()
     with st.chat_message("user", avatar=ROLE_AVATARS.get(role)):
         st.markdown(f":material/palette: **Generar imagen** · estilo _{style}_")
         st.write(prompt)
@@ -268,7 +268,7 @@ def handle_text_composer() -> None:
         message = st.chat_input("Escribe o pega el texto que quieres mejorar...")
         if message:
             title = (message[:40] + "…") if len(message) > 40 else message
-            gemini_style.user_marker()
+            chat_style.user_marker()
             with st.chat_message("user", avatar=ROLE_AVATARS.get(role)):
                 st.markdown(f":material/description: **{title}**")
                 st.write(message)
@@ -289,7 +289,7 @@ def handle_text_composer() -> None:
         extra = st.text_input("Instrucciones adicionales (opcional)", placeholder="Máximo 2 frases, incluir llamado a la acción...")
 
     if st.button("Aplicar", type="primary", icon=":material/play_arrow:", disabled=not task):
-        gemini_style.user_marker()
+        chat_style.user_marker()
         with st.chat_message("user", avatar=ROLE_AVATARS.get(role)):
             st.markdown(f":material/bolt: **{TASK_LABELS[task]}** · _{content['title']}_")
         success = False
@@ -319,7 +319,7 @@ def handle_text_composer() -> None:
         st.rerun()
 
 
-gemini_style.inject_chat()
+chat_style.inject_chat()
 
 render_sidebar()
 
@@ -330,7 +330,7 @@ can_text = can("editar_contenido")
 feed = build_feed()
 
 if not feed:
-    gemini_style.greeting(f"Hola, {user.split(' ')[0].capitalize()}", "¿Qué vamos a crear hoy?")
+    chat_style.greeting(f"Hola, {user.split(' ')[0].capitalize()}", "¿Qué vamos a crear hoy?")
 else:
     st.caption(":material/auto_awesome: Estudio Creativo IA")
 render_feed(feed)

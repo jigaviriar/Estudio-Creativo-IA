@@ -1,10 +1,10 @@
 """Punto de entrada de la app. Ejecutar con: streamlit run app/app.py"""
 import streamlit as st
 
-import gemini_style
+import chat_style
 
 st.set_page_config(page_title="Estudio Creativo IA", page_icon=":material/auto_awesome:", layout="centered")
-gemini_style.inject_global()
+chat_style.inject_global()
 
 page = st.navigation(
     [
