@@ -2,7 +2,7 @@
 
 Caso práctico de Generative AI — **Vía A: aplicación funcional**.
 
-App Streamlit con **una interfaz única estilo chat** (tema oscuro moderno) que integra **Amazon Bedrock** para:
+App Streamlit con **una interfaz única estilo chat** (tema claro, estilo Gemini) que integra **Amazon Bedrock** para:
 - generar imágenes con **Stability AI** (con selector de estilo: anime, óleo, realismo),
 - editar y mejorar texto con **Claude** (resumir, expandir, corregir, generar variaciones),
 - aplicar opcionalmente **RAG** sobre una guía de marca usando embeddings de **Amazon Titan**,
@@ -17,7 +17,7 @@ RAG/memoria, ética y seguridad) se entrega por separado, no en este repositorio
 
 ```
 app/
-  app.py                        # punto de entrada: st.navigation (tema oscuro en .streamlit/config.toml)
+  app.py                        # punto de entrada: st.navigation (tema claro en .streamlit/config.toml)
   config.py                     # configuración (región, IDs de modelo, flags)
   prompts.py                    # system prompt de Claude, plantillas de tarea, estilos de imagen
   security.py                   # moderación básica + cifrado en reposo (Fernet)
@@ -26,7 +26,7 @@ app/
   rag.py                        # troceo, embeddings Titan e índice en memoria para la guía de marca
   auth.py                       # roles y permisos (selección de usuario demo)
   gemini_style.py               # CSS del tema Gemini (burbujas, saludo, input tipo píldora)
-  .streamlit/config.toml        # tema oscuro moderno (chat-like)
+  .streamlit/config.toml        # tema claro estilo Gemini (chat-like)
   app_pages/
     chat.py                     # interfaz única: imágenes + edición de texto + colaboración, en un feed de chat
     etica_seguridad.py          # resumen de las salvaguardas activas
@@ -128,6 +128,8 @@ comentado en ese archivo — es la integración que se ejecutaría en cuanto act
    ocurrió de verdad (no aplica en `DEMO_MODE`, donde se marca como simulada).
 8. (Opcional, antes de grabar de nuevo) En la barra lateral de **Estudio**, usa "Borrar todo y empezar de
    nuevo" para limpiar los datos de prueba — pide confirmación explícita antes de borrar.
+9. (Opcional) En **Auditoría**, el botón "Borrar" hace lo mismo con el historial de llamadas a Bedrock —
+   es independiente del botón anterior, porque ese log no se toca al reiniciar el feed.
 
 ## Notas de seguridad
 
