@@ -11,7 +11,7 @@ App Streamlit con **una interfaz única estilo chat** (tema claro y minimalista)
 - auditar cada llamada real a Bedrock (usuario, modelo, request, response) en una pestaña separada.
 
 El documento de diseño completo (historias de usuario, arquitectura, modelos y parámetros, system prompt,
-RAG/memoria, ética y seguridad) se entrega por separado, no en este repositorio.
+RAG/memoria, ética y seguridad) está en [`docs/`](docs/00-indice.md), separado en un archivo por sección/entregable.
 
 ## Estructura del proyecto
 
@@ -32,6 +32,19 @@ app/
     etica_seguridad.py          # resumen de las salvaguardas activas
     auditoria.py                # registro de cada llamada real a Bedrock: usuario, modelo, request, response
   data/                         # se crea en tiempo de ejecución (gitignored)
+docs/
+  00-indice.md                  # tronco común: índice y enlaces
+  3.1-problema-y-usuarios.md
+  3.2-arquitectura-del-sistema.md
+  3.3-modelos-y-parametros-de-inferencia.md
+  3.4-system-prompt-claude.md
+  3.5-rag-y-memoria.md
+  3.6-etica-y-seguridad.md
+  3.7-resumen-de-decisiones-clave.md
+  fuentes-y-herramientas.md      # fuentes, documentación y herramientas usadas
+  diagrama-arquitectura.svg      # figura de la sección 3.2
+  plan-de-pruebas.md             # checklist de pruebas de usuario
+  Estudio-Creativo-IA-Documento-de-diseno.docx  # export a Word (gitignored, solo local)
 tests/                           # pruebas pytest (moderación, cifrado, permisos por rol)
 logs/                            # logs de ejecución y bedrock_calls.jsonl (se crea al arrancar, gitignored)
 requirements.txt
