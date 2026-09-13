@@ -13,3 +13,6 @@ venv/
 
 # Material del instituto con aviso de "reproducción prohibida" — no se redistribuye.
 IEP/
+
+# Documento de diseño y evidencias de pruebas: se mantienen locales, no en GitHub.
+docs/
